@@ -17,58 +17,60 @@ class EasyInitiative {
 		Hooks.on("renderCombatTracker", (app, html, options) => {
 			// Find all the combatant list items.
 			const combatants = html[0].querySelectorAll("li.combatant");
-			for (const c of combatants) {
-				const combatantId = c.dataset.combatantId;
+			for (const li of combatants) {
+				const combatantId = li.dataset?.combatantId;
 				if (!combatantId)
-					next;
+					continue;
 
-				const initiative = c.querySelector("span.initiative");
-				if (initiative) {
-					// Make the initiative editable.
-					initiative.setAttribute("contentEditable", "plaintext-only");
+				const combatant = options.combat.combatants.get(combatantId);
+				if (!combatant?.isOwner)
+					continue;
+
+				const initiativeSpan = li.querySelector("span.initiative");
+				if (initiativeSpan) {
+					const initiative = document.createElement("input");
+					initiative.setAttribute("type", "number");
+					initiative.classList.add("easy-init-input");
+					initiative.value = initiativeSpan.textContent;
+					initiativeSpan.replaceChild(initiative, initiativeSpan.firstChild);
 
 					// Prevent double clicking the initiative from opening the character sheet.
 					initiative.addEventListener("dblclick", e => e.stopPropagation());
 					initiative.addEventListener("click", e => e.stopPropagation());
 
 					// Select all text when gaining focus.
-					initiative.addEventListener("focus", e => {
-						window.getSelection().selectAllChildren(initiative);
-					});
+					initiative.addEventListener("focus", e => e.currentTarget.select());
 
 					// Handle enter being pressed.
-					initiative.addEventListener("keydown", e => {
-						if (e.key === "Enter") {
-							e.preventDefault();
-							e.stopPropagation();
+					initiative.addEventListener("change", e => {
+						e.stopPropagation();
 
-							// Lose the focus to trigger the initiative update.
-							initiative.blur();
-						}
+						// Lose the focus to trigger the initiative update.
+						e.currentTarget.blur();
 					});
 
 					// Handle the initialive losing focus.
 					initiative.addEventListener("blur", e => {
-						const initiativeInt = parseFloat(initiative.textContent);
+						const initiativeInt = parseFloat(e.currentTarget.value);
 						options.combat.setInitiative(combatantId, initiativeInt);
 					});
 
 					// Gain focus if this was that combatant that had just had the "Roll Initiative" button right-clicked.
-					if (this.combatantToEdit === combatantId) {
+					if (this.combatantToEdit === combatantId)
 						initiative.focus();
-					}
 				}
+				else {
+					const rollInitiative = li.querySelector(".combatant-control.roll");
+					if (rollInitiative) {
+						// Handle right click on the "roll initiative" button.
+						rollInitiative.addEventListener("contextmenu", e => {
+							e.preventDefault();
+							e.stopPropagation();
 
-				const rollInitiative = c.querySelector(".combatant-control.roll");
-				if (rollInitiative) {
-					// Handle right click on the "roll initiative" button.
-					rollInitiative.addEventListener("contextmenu", e => {
-						e.preventDefault();
-						e.stopPropagation();
-
-						options.combat.setInitiative(combatantId, 0);
-						this.combatantToEdit = combatantId;
-					});
+							options.combat.setInitiative(combatantId, 0);
+							this.combatantToEdit = combatantId;
+						});
+					}
 				}
 			}
 

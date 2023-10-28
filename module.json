@@ -25,7 +25,9 @@
 		"scripts/easy-initiative.js"
 	],
 	"scripts": [],
-	"styles": [],
+	"styles": [
+		"styles/easy-initiative.css"
+	],
 	"url": "#{URL}#",
 	"manifest": "#{MANIFEST}#",
 	"download": "#{DOWNLOAD}#"
