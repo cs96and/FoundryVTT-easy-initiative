@@ -1,0 +1,32 @@
+{
+	"id": "easy-initiative",
+	"name": "easy-initiative",
+	"type": "module",
+	"title": "Easy Initiative",
+	"description": "Allows easy inline edititing of initiative values",
+	"version": "#{VERSION}#",
+	"library": false,
+	"compatibility": {
+		"minimum": "10",
+		"verified": "11"
+	},
+	"manifestPlusVersion": "1.2.0",
+	"minimumCoreVersion": "10",
+	"compatibleCoreVersion": "11",
+	"authors": [
+		{
+			"name": "Alan Davies",
+			"discord": "cs96and#3764",
+			"ko-fi": "cs96and"
+		}
+	],
+	"author": "Alan Davies",
+	"esmodules": [
+		"scripts/easy-initiative.js"
+	],
+	"scripts": [],
+	"styles": [],
+	"url": "#{URL}#",
+	"manifest": "#{MANIFEST}#",
+	"download": "#{DOWNLOAD}#"
+}
