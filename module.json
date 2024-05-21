@@ -6,13 +6,11 @@
 	"description": "Allows easy inline edititing of initiative values",
 	"version": "#{VERSION}#",
 	"library": false,
+	"manifestPlusVersion": "1.2.0",
 	"compatibility": {
 		"minimum": "10",
-		"verified": "11"
+		"verified": "12"
 	},
-	"manifestPlusVersion": "1.2.0",
-	"minimumCoreVersion": "10",
-	"compatibleCoreVersion": "11",
 	"authors": [
 		{
 			"name": "Alan Davies",
@@ -20,7 +18,6 @@
 			"ko-fi": "cs96and"
 		}
 	],
-	"author": "Alan Davies",
 	"esmodules": [
 		"scripts/easy-initiative.js"
 	],
