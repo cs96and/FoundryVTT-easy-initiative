@@ -11,10 +11,16 @@
  */
 
 class EasyInitiative {
-	constructor() {
-		this.combatantToEdit = null;
+	#combatantToEdit;
 
-		Hooks.on("renderCombatTracker", (app, html, options) => {
+	constructor() {
+		this.#combatantToEdit = null;
+		Hooks.on("renderCombatTracker", this.#onRenderCombatTracker.bind(this));
+	}
+
+	#onRenderCombatTracker(app, html, options) {
+		try
+		{
 			// Find all the combatant list items.
 			const combatants = html[0].querySelectorAll("li.combatant");
 			for (const li of combatants) {
@@ -56,7 +62,7 @@ class EasyInitiative {
 					});
 
 					// Gain focus if this was that combatant that had just had the "Roll Initiative" button right-clicked.
-					if (this.combatantToEdit === combatantId)
+					if (this.#combatantToEdit === combatantId)
 						initiative.focus();
 				}
 				else {
@@ -68,14 +74,14 @@ class EasyInitiative {
 							e.stopPropagation();
 
 							options.combat.setInitiative(combatantId, 0);
-							this.combatantToEdit = combatantId;
+							this.#combatantToEdit = combatantId;
 						});
 					}
 				}
 			}
-
-			this.combatantToEdit = null;
-		});
+		} finally {
+			this.#combatantToEdit = null;
+		}
 	}
 }
 
