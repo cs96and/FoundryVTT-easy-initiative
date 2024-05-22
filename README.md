@@ -8,6 +8,7 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/C0C057N35)
 
 Easy Initiative is a FoundryVTT module that allows inline editing of initiative values in the combat tracker.
+You can also re-order the initiative by dragging and dropping combatants in the combat tracker.
 
 ## Installation
 Easy Initiative can be installed using the Foundry module installer.  Alternatively, you can install it using the following manifest URL...
