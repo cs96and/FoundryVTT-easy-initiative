@@ -13,3 +13,7 @@
 input.easy-init-input {
     color: inherit !important;
 }
+
+div.token-initiative {
+    flex-grow: 0.1;
+}

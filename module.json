@@ -1,15 +1,12 @@
 {
 	"id": "easy-initiative",
-	"name": "easy-initiative",
-	"type": "module",
 	"title": "Easy Initiative",
 	"description": "Allows easy inline edititing of initiative values",
 	"version": "#{VERSION}#",
 	"library": false,
-	"manifestPlusVersion": "1.2.0",
 	"compatibility": {
 		"minimum": "10",
-		"verified": "12"
+		"verified": "13"
 	},
 	"authors": [
 		{
